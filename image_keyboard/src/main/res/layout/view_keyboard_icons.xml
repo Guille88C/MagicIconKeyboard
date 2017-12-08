@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/llBottom"
+        android:layout_width="0dp"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:background="#fff"
+        app:layout_constraintBottom_toTopOf="@+id/flIcons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/tvText"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_marginEnd="1dp"
+            android:background="#a9b2bc"
+            android:gravity="center"
+            android:text="@string/tab_abc"
+            android:textColor="#fff"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tvEmoji"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:layout_marginEnd="1dp"
+            android:background="#a9b2bc"
+            android:gravity="center"
+            android:text="Emoji" />
+
+        <TextView
+            android:id="@+id/tvEmotion"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="#a9b2bc"
+            android:gravity="center"
+            android:text="Emotion" />
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/flIcons"
+        android:layout_width="0dp"
+        android:layout_height="230dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpEmoji"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#eff0f2"
+            android:visibility="gone"/>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vpEmotions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#eff0f2"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</android.support.constraint.ConstraintLayout>

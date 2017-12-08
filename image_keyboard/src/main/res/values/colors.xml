@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Keyboard icons screen -->
+    <color name="tab_unselected">#a9b2bc</color>
+    <color name="tab_selected">#9199a2</color>
+</resources>

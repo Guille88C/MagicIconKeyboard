@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/clCounterContainer">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/llHeader"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:orientation="vertical"
+                android:background="#aaa"/>
+
+            <LinearLayout
+                android:id="@+id/llTab"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:orientation="horizontal"
+                android:background="#333333"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llHeader"/>
+
+
+            <EditText
+                android:id="@+id/etText"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                android:padding="20dp"
+                android:background="#ffffff"
+                android:gravity="top|start"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:inputType="textMultiLine"
+                android:maxLength="160"
+                android:longClickable="false"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llTab"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clCounterContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/kivKeyboard">
+
+        <TextView
+            android:id="@+id/tvTextCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_alignTop="@+id/bPerform"
+            android:layout_alignBottom="@+id/bPerform"
+            android:text="@string/tv_characters_counter"
+            android:textSize="12sp"
+            android:textColor="#d0d2d3"
+            app:layout_constraintTop_toTopOf="@+id/bPerform"
+            app:layout_constraintBottom_toBottomOf="@+id/bPerform"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <Button
+            android:id="@+id/bPerform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:background="@null"
+            android:text="@string/b_perform_action"
+            android:textColor="#00d4f4"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+    <gcuestab.com.imagekeyboard.KeyboardImageView
+        android:id="@+id/kivKeyboard"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:keyboard_icon_edit_text="@id/etText"/>
+</android.support.constraint.ConstraintLayout>
