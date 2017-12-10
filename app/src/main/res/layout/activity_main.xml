@@ -2,12 +2,12 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff">
 
-    <ScrollView
+    <gcuestab.com.imagekeyboard.KeyboardIconsScrollView
+        android:id="@+id/svContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/llHeader"/>
 
 
-            <EditText
+            <gcuestab.com.imagekeyboard.KeyboardIconsEditText
                 android:id="@+id/etText"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
@@ -58,7 +58,7 @@
 
         </android.support.constraint.ConstraintLayout>
 
-    </ScrollView>
+    </gcuestab.com.imagekeyboard.KeyboardIconsScrollView>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/clCounterContainer"
@@ -102,5 +102,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:keyboard_icon_edit_text="@id/etText"/>
+        app:keyboard_icon_edit_text="@id/etText"
+        app:keyboard_icon_scroll_view="@id/svContainer"/>
 </android.support.constraint.ConstraintLayout>

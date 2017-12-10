@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="keyboard_icon">
         <attr name="keyboard_icon_edit_text" format="reference" />
+        <attr name="keyboard_icon_scroll_view" format="reference" />
     </declare-styleable>
 </resources>

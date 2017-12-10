@@ -1,7 +1,6 @@
 package gcuestab.com.imagekeyboard
 
 import android.content.Context
-import android.graphics.Color
 import android.support.constraint.ConstraintLayout
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -15,13 +14,14 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ScrollView
 import gcuestab.com.magickeyboard2.KeyboardIconsAdapter
 import kotlinx.android.synthetic.main.view_keyboard_icons.view.*
 
 /**
  * Created by gcuestab on 6/12/17.
  */
-class KeyboardImageView : ConstraintLayout, KeyboardIconsAdapter.IKeyboardIcons, TextWatcher {
+class KeyboardImageView : ConstraintLayout, KeyboardIconsAdapter.IKeyboardIcons, TextWatcher, KeyboardIconsEditText.IKeyboardIconEditText, KeyboardIconsScrollView.IKeyboardIconsScrollView {
     companion object {
         private const val SINGLE_IMAGE_MODE = 0
         private const val ADVANCE_IMAGE_MODE = 1
@@ -33,6 +33,8 @@ class KeyboardImageView : ConstraintLayout, KeyboardIconsAdapter.IKeyboardIcons,
 
     private var idEtText: Int = -1
     private var etText: EditText? = null
+    private var idSvContainer: Int = -1
+    private var svContainer: ScrollView? = null
     private var focusEnable = true
     private var prevImagePosition = -1
 
@@ -57,28 +59,53 @@ class KeyboardImageView : ConstraintLayout, KeyboardIconsAdapter.IKeyboardIcons,
     private fun initAttrs(context: Context, attrs: AttributeSet) {
         val a = context.obtainStyledAttributes(attrs, R.styleable.keyboard_icon)
         this.idEtText = a.getResourceId(R.styleable.keyboard_icon_keyboard_icon_edit_text, -1)
+        this.idSvContainer = a.getResourceId(R.styleable.keyboard_icon_keyboard_icon_scroll_view, -1)
         a.recycle()
     }
 
     fun initComponents() {
         if (this.idEtText != -1) {
-            this.etText = this.rootView.findViewById(idEtText)
+            this.etText = this.rootView.findViewById(this.idEtText)
+
+            if (this.etText is KeyboardIconsEditText) {
+                (this.etText as KeyboardIconsEditText).iKeyboardIcon = this
+            }
+        }
+
+        if (this.idSvContainer != -1) {
+            this.svContainer = this.rootView.findViewById(this.idSvContainer)
+
+            if (this.svContainer is KeyboardIconsScrollView) {
+                (this.svContainer as KeyboardIconsScrollView).iKeyboardIcon = this
+            }
         }
     }
 
     fun init() {
         this.tvText.setOnClickListener { _ ->
+            if (this.svContainer is KeyboardIconsScrollView) {
+                (this.svContainer as KeyboardIconsScrollView).permanentDisableKeyEvent = true
+            }
+
             this.enableKeyboard()
             this.selectAbcTab()
         }
 
-        this.tvEmoji.setOnClickListener { v ->
+        this.tvEmoji.setOnClickListener { _ ->
+            if (this.svContainer is KeyboardIconsScrollView) {
+                (this.svContainer as KeyboardIconsScrollView).permanentDisableKeyEvent = true
+            }
+
             this.enableIcons()
             this.enableEmojiVP()
             this.selectEmojiTab()
         }
 
-        this.tvEmotion.setOnClickListener { v ->
+        this.tvEmotion.setOnClickListener { _ ->
+            if (this.svContainer is KeyboardIconsScrollView) {
+                (this.svContainer as KeyboardIconsScrollView).permanentDisableKeyEvent = true
+            }
+
             this.enableIcons()
             this.enableEmotionVP()
             this.selectEmotionTab()
@@ -112,7 +139,7 @@ class KeyboardImageView : ConstraintLayout, KeyboardIconsAdapter.IKeyboardIcons,
         vpEmotionAdapter.setItemClick(this)
         this.vpEmotions.adapter = vpEmotionAdapter
 
-        this.hideKeyboard()
+        this.unselectAll()
     }
 
     fun clear() {
@@ -264,5 +291,24 @@ class KeyboardImageView : ConstraintLayout, KeyboardIconsAdapter.IKeyboardIcons,
         }
     }
     // ==== END TextWatcher ====
+
+    override fun hideKeyboardET() {
+        if (this.svContainer is KeyboardIconsScrollView) {
+            (this.svContainer as KeyboardIconsScrollView).permanentDisableKeyEvent = false
+            (this.svContainer as KeyboardIconsScrollView).oneCycleDisableKeyEvent = true
+        }
+
+        this.unselectAll()
+    }
+    // ==== END IKeyboardIconsEditText ====
+
+    override fun showKeyboardSV() {
+        if (this.svContainer is KeyboardIconsScrollView) {
+            (this.svContainer as KeyboardIconsScrollView).permanentDisableKeyEvent = true
+        }
+
+        this.selectAbcTab()
+    }
+    // ==== END IKeyboardIconsScrollView ====
 
 }

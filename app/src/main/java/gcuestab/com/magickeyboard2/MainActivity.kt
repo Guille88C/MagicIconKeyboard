@@ -29,6 +29,10 @@ class MainActivity : AppCompatActivity(), TextWatcher {
         this.clear()
     }
 
+    override fun onResume() {
+        super.onResume()
+    }
+
     private fun init() {
         this.etText.addTextChangedListener(this)
 
